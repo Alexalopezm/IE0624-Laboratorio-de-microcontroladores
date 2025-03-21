@@ -54,11 +54,11 @@ void main(void)
         // Incrementar el contador de forma continua
         contador++;
 
-        // Un pequeño retraso para la desincronización
+        // Desincronización
         delay(10);
 
         if (GP5 == 1){
-            //Manejo del rebote del boton
+            // Rebote del boton
             while(GP5 == 1);
             delay(10);
 

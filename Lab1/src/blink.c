@@ -40,62 +40,98 @@ void delay(unsigned int tiempo);
 void main(void)
 {
 
-    TRISIO = 0b00100000; //Poner todos los pines como salidas
+    TRISIO = 0b00101000; //Poner todos los pines como salidas
 	GPIO = 0x00; //Poner pines en bajo
     //ANSEL = 0;
  
     unsigned int time = 100;
+    unsigned int contador = 0;
+    unsigned int numero_random;
  
     //Loop forever
     while ( 1 )
     {
-        // Número 1
-            GP0 = 1;
-            delay(time);
+        // Incrementar el contador de forma continua
+        contador++;
 
-            // Apagar los pines, pero no todos
-            GP0 = 0;  // Apagar solo GP0
-            delay(time);
+        // Un pequeño retraso para la desincronización
+        delay(10);
 
-        // Número 2
-            GP1 = 1;
-            delay(time);
+        if (GP5 == 1){
+            //Manejo del rebote del boton
+            while(GP5 == 1);
+            delay(10);
 
-            // Apagar los pines
-            GP1 = 0;  // Apagar solo GP1
-            delay(time);
+            // Generar un número aleatorio con el valor actual del contador
+            numero_random= contador % 6 + 1;
 
-        // Número 3
-            GPIO = 0b00000011;  // Enciende GP0 y GP1 al mismo tiempo
-            delay(time);
+            // Configurar LEDs según el número aleatorio generado
+            switch(numero_random){
+                case 1: // Número 1
+                
+                    GP0 = 1;
+                    delay(time);
 
-            // Apagar los pines
-            GP0 = 0; GP1 = 0;  // Apagar GP0 y GP1
-            delay(time);
+                    // Apagar los pines, pero no todos
+                    GP0 = 0;  // Apagar solo GP0
+                    delay(time);
+                break;
+
+                case 2: // Número 2
+                    GP1 = 1;
+                    delay(time);
+
+                    // Apagar los pines
+                    GP1 = 0;  // Apagar solo GP1
+                    delay(time);
+                break;
+
+                case 3:// Número 3
+                    GPIO = 0b00000011;  // Enciende GP0 y GP1 al mismo tiempo
+                    delay(time);
+
+                    // Apagar los pines
+                    GP0 = 0; GP1 = 0;  // Apagar GP0 y GP1
+                    delay(time);
+
+                break;
+
+                case 4:// Número 4
+                    GPIO = 0b00000110;  // Enciende GP0 y GP1 al mismo tiempo
+                    delay(time);
+
+                    // Apagar los pines
+                    GP1 = 0; GP2 = 0;  // Apagar GP0 y GP1
+                    delay(time);
+
+                break;
+
+                case 5:// Número 5
+                    GPIO = 0b00000111;  // Enciende GP0 y GP1 al mismo tiempo
+                    delay(time);
+
+                    // Apagar los pines
+                    GP0 = 0; GP1 = 0; GP2 = 0;  // Apagar GP0 y GP1
+                    delay(time);
+
+                break;
+
+                case 6:// Número 6
+                    GPIO = 0b00010110;  // Enciende GP0 y GP1 al mismo tiempo
+                    delay(time);
+
+                    // Apagar los pines
+                    GP0 = 0; GP1 = 0; GP2 = 0; GP4 = 0;  // Apagar GP0 y GP1
+                    delay(time);
+
+                break;
+
+            }
+            // Retraso para mostrar el número
+            //delay(450);
+
+        }
         
-        // Número 4
-            GPIO = 0b00000110;  // Enciende GP0 y GP1 al mismo tiempo
-            delay(time);
-
-            // Apagar los pines
-            GP1 = 0; GP2 = 0;  // Apagar GP0 y GP1
-            delay(time);
-        
-        // Número 5
-            GPIO = 0b00000111;  // Enciende GP0 y GP1 al mismo tiempo
-            delay(time);
-
-            // Apagar los pines
-            GP0 = 0; GP1 = 0; GP2 = 0;  // Apagar GP0 y GP1
-            delay(time);
-        
-        // Número 6
-            GPIO = 0b00001110;  // Enciende GP0 y GP1 al mismo tiempo
-            delay(time);
-
-            // Apagar los pines
-            GP0 = 0; GP1 = 0; GP2 = 0; GP3 = 0;  // Apagar GP0 y GP1
-            delay(time);
     }
         
 }

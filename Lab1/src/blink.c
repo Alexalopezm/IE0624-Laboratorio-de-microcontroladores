@@ -127,13 +127,8 @@ void main(void)
                 break;
 
             }
-            // Retraso para mostrar el número
-            //delay(450);
-
         }
-        
     }
-        
 }
  
 

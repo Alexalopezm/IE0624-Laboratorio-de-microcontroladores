@@ -42,7 +42,6 @@ void main(void)
 
     TRISIO = 0b00101000; //Poner todos los pines como salidas
 	GPIO = 0x00; //Poner pines en bajo
-    //ANSEL = 0;
  
     unsigned int time = 100;
     unsigned int contador = 0;
